@@ -12,7 +12,7 @@ REDIRECT_URI = "http://localhost:8888/callback/"
 SCOPE = "user-top-read"
 
 
-def get_user_top_tracks(spotify: spotipy.Spotify, n_songs: int) -> List[Tuple[str, List[str]]]:
+def get_user_top_tracks(spotify: spotipy.Spotify, n_songs: int) -> List[Tuple[str, str, List[str]]]:
     """
         Returns a list of tuples containing the top 'n_songs' from specified user.
         The tuples contain the name of the song alongside with the respective artists.
@@ -24,7 +24,8 @@ def get_user_top_tracks(spotify: spotipy.Spotify, n_songs: int) -> List[Tuple[st
     for track in top_tracks_response["items"]:
         track_name = track["name"]
         track_artists = [artist["name"] for artist in track["artists"]]
-        top_tracks.append((track_name, track_artists))
+        track_id = track["id"]
+        top_tracks.append((track_id, track_name, track_artists))
 
     return top_tracks
     

@@ -8,12 +8,22 @@ from song_meta import SongMeta
 from embedding import generate_embedding_string
 from get_lyrics_embedding import get_lyrics_embeddings
 from find_best_cluster import find_best_cluster
+from get_k_songs_closes_to_centroid import get_k_songs_closes_to_centroid
+from ordenate_musics import ordenate_music
+from save_previews import save_preview
+from ffmpeg import merge
+from datetime import timedelta
 from sklearn.cluster import KMeans
+
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 REDIRECT_URI = "http://localhost:8888/callback/"
 SCOPE = "user-top-read"
 
-def generate_song_from_user(user_id: str, prompt: str):
+def generate_song_from_user(user_id: str, prompt: str) -> :
     user = User(user_id)
     
     load_dotenv("../.env")
@@ -46,13 +56,21 @@ def generate_song_from_user(user_id: str, prompt: str):
     kmeans.fit(embeddings)
 
     best_cluster = find_best_cluster(co, kmeans, prompt)
-    print(best_cluster)
-
-
+    cluster_embeddings_idx = get_k_songs_closes_to_centroid(
+        kmeans, best_cluster, embeddings, 4
+    )
+    tracks_ordered = ordenate_music(cluster_embeddings_idx, embeddings)
     
+    downloaded_paths = []
+    for track_idx in tracks_ordered:
+        song_id = trackmeta_list[track_idx].song_id
+        downloaded_paths.append(save_preview(sp, user_id, song_id))
 
-    
+    merged_song = merge(downloaded_paths)
+    return merged_song
 
 
 if __name__ == "__main__":
+    logging.basicConfig()
+
     generate_song_from_user("p84rppfqm6cyn6phuxc3p41w7", "foda")

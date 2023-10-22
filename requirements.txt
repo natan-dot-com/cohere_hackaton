@@ -43,3 +43,5 @@ Werkzeug==3.0.0
 wrapt==1.15.0
 yarl==1.9.2
 zipp==3.17.0
+gunicorn==21.2.0
+packaging==23.2

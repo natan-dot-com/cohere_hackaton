@@ -59,7 +59,8 @@ if __name__ == '__main__':
 
     prompt='I would like to listen to a more chilling music'
     cluster_idx = find_best_cluster(co, kmeans, prompt)
-    print(cluster_idx)
+
+    get_k_songs_closes_to_centroid(kmeans, cluster_idx, embeddings, 2)
 
     get_k_songs_closes_to_centroid(kmeans, cluster_idx, embeddings, 2)
 

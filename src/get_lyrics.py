@@ -1,8 +1,10 @@
 import os
-from functools import lru_cache
+from pathlib import Path
 import lyricsgenius as lg
 
-@lru_cache(maxsize=128)
+from disk_cache import diskcache
+
+@diskcache(path=".cache/get_lyrics.log")
 def get_lyrics(
     music: str,
     artist: str

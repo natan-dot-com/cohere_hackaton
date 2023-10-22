@@ -58,6 +58,8 @@ if __name__ == '__main__':
 
     prompt='I would like to listen to a more chilling music'
     cluster_idx = find_best_cluster(co, kmeans, prompt)
+    print(cluster_idx)
 
     prompt='I am pissed today!'
     cluster_idx = find_best_cluster(co, kmeans, prompt)
+    print(cluster_idx)

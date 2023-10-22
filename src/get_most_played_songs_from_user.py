@@ -28,22 +28,3 @@ def get_user_top_tracks(spotify: spotipy.Spotify, n_songs: int) -> List[Tuple[st
         top_tracks.append((track_id, track_name, track_artists))
 
     return top_tracks
-    
-
-def main():
-    load_dotenv("../.env")
-
-    client_id = os.getenv("SPOTIFY_CLIENT_ID")
-    client_secret = os.getenv("SPOTIFY_CLIENT_SECRET")
-
-    token = util.prompt_for_user_token(USERNAME, scope=SCOPE, client_id=client_id, client_secret=client_secret, redirect_uri=REDIRECT_URI)
-    spotify = spotipy.Spotify(auth=token)
-    
-    top_tracks = get_user_top_tracks(spotify, 50)
-
-    print(top_tracks)
-    assert len(top_tracks) == 50
-
-
-if __name__ == "__main__":
-    main()

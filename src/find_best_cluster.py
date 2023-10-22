@@ -30,39 +30,3 @@ def find_best_cluster(
     closest_idx = np.argmin(distances)
 
     return closest_idx
-
-
-if __name__ == '__main__':
-    from dotenv import load_dotenv
-    import os
-    load_dotenv()
-    list_lyrics = []
-    songs = [
-        ('Better Together', 'Jack Johnson'),
-        ('Upside Down', 'Jack Johnson'),
-        ('Duality', 'Slipknot'),
-        ('Psychosocial', 'Slipknot'),
-    ]
-    for music, artist in songs:
-        list_lyrics.append(get_lyrics(music, artist))
-
-    cohere_token = os.getenv('COHERE_API_KEY')
-    co = cohere.Client(cohere_token)
-    embeddings = get_lyrics_embeddings(co, list_lyrics)
-    print(type(embeddings))
-    print(embeddings.shape)
-    assert embeddings.shape[0] == 4
-
-    kmeans = KMeans(n_clusters=2)
-    kmeans = kmeans.fit(embeddings)
-    print(f'kmeans labels: {kmeans.labels_}')
-
-    prompt='I would like to listen to a more chilling music'
-    cluster_idx = find_best_cluster(co, kmeans, prompt)
-
-    get_k_songs_closes_to_centroid(kmeans, cluster_idx, embeddings, 2)
-
-    get_k_songs_closes_to_centroid(kmeans, cluster_idx, embeddings, 2)
-
-    prompt='I am pissed today!'
-    cluster_idx = find_best_cluster(co, kmeans, prompt)

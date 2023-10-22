@@ -22,22 +22,3 @@ def get_lyrics_embeddings(
 
     embeddings = response.embeddings
     return np.array(embeddings)
-
-if __name__ == '__main__':
-    from dotenv import load_dotenv
-    import os
-    load_dotenv()
-    list_lyrics = []
-    songs = [
-        ('Free Bird', 'Lynyrd Skynyrd'),
-        ('Oh! Darling', 'The Beatles')
-    ]
-    for music, artist in songs:
-        list_lyrics.append(get_lyrics(music, artist))
-
-    cohere_token = os.getenv('COHERE_API_KEY')
-    co = cohere.Client(cohere_token)
-    embeddings = get_lyrics_embeddings(co, list_lyrics)
-    print(type(embeddings))
-    print(embeddings.shape)
-    assert embeddings.shape == (2, 1024)

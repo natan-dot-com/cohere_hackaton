@@ -15,10 +15,3 @@ def get_lyrics(
     song = genius.search_song(music, artist)
     if song is None: return None
     return song.lyrics
-
-if __name__ == '__main__':
-    from dotenv import load_dotenv
-    load_dotenv()
-    lyrics = get_lyrics('Free Bird', 'Lynyrd Skynyrd')
-    print(f'type: {type(lyrics)}')
-    print(lyrics)

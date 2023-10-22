@@ -44,6 +44,10 @@ class SongMeta:
         self.song_bpm = features_response["tempo"]
 
 
+    def has_preview(self, sp: spotipy.Spotify) -> bool:
+        return sp.track(track_id=self.song_id)["preview_url"] is not None
+
+
     def get_audio_features(self) -> List[Union[int, float]]:
         return [
             self.danceability,

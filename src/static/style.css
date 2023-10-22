@@ -7,24 +7,44 @@
 body {
     margin: 0;
     padding: 0;
-}
 
-main {
     background-color: var(--bg-color);
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
+    color: white;
+    font-family: monospace;
+
+    display: grid;
+    grid-template-rows: 1fr 9fr;
+}
+
+header {
+    padding: 1em 2em;
+}
+
+main {
+    height: 100%;
 }
 
 .center {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    row-gap: 2em;
 
     height: 100%;
+}
+
+input[type="text"] {
+    border-radius: 100px;
+    padding: 1em;
+    width: 500px;
+    text-align: center;
+    font-size: 1.2rem;
 }
 
 button {
@@ -33,7 +53,6 @@ button {
     padding: 1em;
     border: none;
     font-size: 1.5rem;
-    font-family: monospace;
     border-radius: 100px;
     transition: background-color 100ms ease-in;
     display: flex;
@@ -42,16 +61,18 @@ button {
     justify-content: center;
 }
 
-button[!disabled]:hover {
+button:not(disabled):hover {
     background-color: var(--btn-bg-hover-color);
     cursor: pointer;
 }
 
 #login_btn {
+    width: 356px;
+    height: 80px;
 }
 
 #generate {
-    width: 356px;
+    width: 200px;
     height: 80px;
 }
 

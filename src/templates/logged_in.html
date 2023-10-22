@@ -6,13 +6,17 @@
         <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
     </head>
     <body>
+        <header>
+            <h1>The Prompters: Gerador de música do ano</h1>
+        </header>
         <main>
-            <div class="center">
+            <form class="center">
+                <input id="prompt" type="text" placeholder="Que tipo de mashup vamos gerar?">
                 <button id="generate" onclick="generateSong()">
-                    <div id="generate-btn-content">Login and generate!</div>
+                    <div id="generate-btn-content">Generate!</div>
                     <div class="loader" id="loading" style="display: none;"></div>
                 </button>
-            <div>
+            <form>
         </main>
         <script src="{{ url_for('static', filename='logged_in.js') }}" defer></script>
     </body>

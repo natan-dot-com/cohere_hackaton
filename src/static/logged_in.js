@@ -8,6 +8,7 @@ const SPOTIFY_INFO_KEY = "SPOTIFY_INFO"
 const generateBtn = document.getElementById("generate");
 const generateBtnContent = document.getElementById("generate-btn-content");
 const loading = document.getElementById("loading");
+const prompt = document.getElementById("prompt");
 
 const info = localStorage.getItem(SPOTIFY_INFO_KEY);
 if (!info) {
@@ -27,6 +28,7 @@ async function generateSong() {
         body: JSON.stringify({
             profileId: profile.id,
             accessToken,
+            prompt: prompt.value,
         })
     });
 

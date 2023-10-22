@@ -4,6 +4,7 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import pairwise_distances
 from get_lyrics import get_lyrics
 from get_lyrics_embedding import get_lyrics_embeddings
+from get_k_songs_closes_to_centroid import get_k_songs_closes_to_centroid
 
 
 def find_best_cluster(
@@ -58,8 +59,9 @@ if __name__ == '__main__':
 
     prompt='I would like to listen to a more chilling music'
     cluster_idx = find_best_cluster(co, kmeans, prompt)
-    print(cluster_idx)
+
+    get_k_songs_closes_to_centroid(kmeans, cluster_idx, embeddings, 2)
 
     prompt='I am pissed today!'
     cluster_idx = find_best_cluster(co, kmeans, prompt)
-    print(cluster_idx)
+    get_k_songs_closes_to_centroid(kmeans, cluster_idx, embeddings, 2)

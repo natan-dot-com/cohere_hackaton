@@ -28,8 +28,8 @@ pip3 install -r requirements.txt
 python3 -m flask --app src/main.py --debug run --port 8888
 ```
 
-Nossa aplicação utiliza algumas APIS (Cohere, Spotify, Genius).
-Logo é necessario preencher as variaveis de ambiente com suas respectivas chaves em um arquivo .env, no seguinte formato:
+Our applications need some APIs in order to get the work done (such as Cohere, Spotify and Genius).
+It's necessary to fill an `.env` file with the environment variables as follows, including the keys to the respective APIs:
 ```
 SPOTIFY_CLIENT_ID=
 SPOTIFY_CLIENT_SECRET=
@@ -37,6 +37,6 @@ COHERE_API_KEY=
 GENIUS_ACCESS_TOKEN=
 ```
 
-1-  o usuario deve logar em sua conta spotify, para a API poder extrair informações a respeito de suas musicas mais ouvidas. 
-2- Deve colocar um prompt onde se deseja que a musica final seja relacionada.
-3- O audio final será disponibilizado para que o usuario possa ouvir/baixar na propria pagina. 
+1. The user must log in their spotify account to be able to extract from the API the most listened musics.
+2. The user should provide a prompt related to the desired song.
+3. The final audio will be made available to download in the page itself.

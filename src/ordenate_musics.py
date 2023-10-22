@@ -16,7 +16,7 @@ import typing as t
 def ordenate_music(
     music_idxs: np.ndarray,
     embeddings: np.ndarray
-) -> int:
+) -> t.List[int]:
     target_embeddings = embeddings[music_idxs]
     distance_matrix = pairwise_distances(
         target_embeddings,
@@ -25,7 +25,7 @@ def ordenate_music(
     )
 
     permutation, _ = solve_tsp_dynamic_programming(distance_matrix)
-    return music_idxs[permutation]
+    return music_idxs[permutation].tolist()
 
 
 

@@ -1,8 +1,6 @@
 import os
 import lyricsgenius as lg
 
-# pip3 install lyricsgenius
-
 def get_lyrics(music: str, artist: str):
     token = os.getenv('GENIUS_ACCESS_TOKEN')
     genius = lg.Genius(token)

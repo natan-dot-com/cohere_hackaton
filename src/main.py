@@ -1,4 +1,6 @@
 import os
+import base64
+from generate_song import generate_song_from_user
 from dotenv import load_dotenv
 
 import flask
@@ -21,8 +23,11 @@ def handle_logged_in():
 @app.route("/api/generate_song", methods=["POST"])
 def handle_generate_song():
     body = flask.request.get_json()
-    print(body)
-    return flask.jsonify({ "result": "ok" })
+    generated_song = generate_song_from_user(body["user_id"], body["prompt"])
+    with open(generated_song, "rb") as infile:
+        data = infile.read()
+    data = base64.b64encode(data)
+    return flask.jsonify({ "data": data, "result": "ok" })
 
 def main():
     load_dotenv("../.env")

@@ -1,6 +1,8 @@
 import os
+from functools import lru_cache
 import lyricsgenius as lg
 
+@lru_cache(maxsize=128)
 def get_lyrics(
     music: str,
     artist: str
@@ -17,4 +19,3 @@ if __name__ == '__main__':
     lyrics = get_lyrics('Free Bird', 'Lynyrd Skynyrd')
     print(f'type: {type(lyrics)}')
     print(lyrics)
-

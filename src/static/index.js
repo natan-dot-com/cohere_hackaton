@@ -1,6 +1,7 @@
 
 const BACKEND = "http://localhost:8888/callback/";
 const CLIENT_ID = "4b01eb5194cd4aa6afb6aa9e31eca0f4";
+const SCOPE = "user-read-private user-read-email user-top-read";
 
 // Local Storage key for storing spotify info
 const SPOTIFY_INFO_KEY = "SPOTIFY_INFO"
@@ -40,7 +41,7 @@ async function redirectToAuthCodeFlow(clientId) {
     params.append("client_id", clientId);
     params.append("response_type", "code");
     params.append("redirect_uri", BACKEND);
-    params.append("scope", "user-read-private user-read-email");
+    params.append("scope", SCOPE);
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
 

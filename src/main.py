@@ -2,8 +2,16 @@ import os
 import base64
 from generate_song import generate_song_from_user
 from dotenv import load_dotenv
+import logging
 
 import flask
+
+load_dotenv("../.env")
+
+logging.basicConfig();
+
+logger = logging.getLogger("root")
+logger.setLevel(logging.INFO)
 
 app = flask.Flask(__name__)
 
@@ -23,15 +31,6 @@ def handle_logged_in():
 @app.route("/api/generate_song", methods=["POST"])
 def handle_generate_song():
     body = flask.request.get_json()
-    generated_song = generate_song_from_user(body["user_id"], body["prompt"])
-    with open(generated_song, "rb") as infile:
-        data = infile.read()
-    data = base64.b64encode(data)
-    return flask.jsonify({ "data": data, "result": "ok" })
-
-def main():
-    load_dotenv("../.env")
-
-
-if __name__ == '__main__':
-    main()
+    logger.info("generating song for user '%s'", body["profileId"])
+    generated_song = generate_song_from_user(body["accessToken"], body["profileId"], body["prompt"])
+    return flask.send_file(generated_song.path, mimetype="audio/mp3")

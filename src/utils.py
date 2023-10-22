@@ -14,5 +14,7 @@ def discretize(range: Tuple[int, int], n_bins: int, value: float) -> int:
         if value <= local_upperbound:
             return label
 
+    assert False, "unreachable"
+
 if __name__ == "__main__":
     print(discretize((0, 1), 4, 0.95))

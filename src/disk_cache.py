@@ -4,6 +4,7 @@ from pathlib import Path
 import logging
 
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
 def diskcache(path, maxsize=None):
     def attr(func):
@@ -15,8 +16,10 @@ def diskcache(path, maxsize=None):
         def _wrapped(*args):
             tup = tuple(args)
             if tup in cache:
+                logger.debug("cache hit on %s", str(tup))
                 return cache[tup]
             else:
+                logger.debug("cache miss on %s", str(tup))
                 cache[tup] = func(*args)
                 return cache[tup]
 
@@ -52,5 +55,5 @@ class DiskCache:
                 for line in f.readlines():
                     entry = json.loads(line)
                     self.memcache[tuple(entry["key"])] = entry["value"]
-        else:
+        elif not self.path.parent.exists():
             os.makedirs(self.path.parent)

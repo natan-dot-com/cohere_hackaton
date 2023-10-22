@@ -9,6 +9,7 @@ const generateBtn = document.getElementById("generate");
 const generateBtnContent = document.getElementById("generate-btn-content");
 const loading = document.getElementById("loading");
 const prompt = document.getElementById("prompt");
+const audio = document.getElementById("generated_audio");
 
 const info = localStorage.getItem(SPOTIFY_INFO_KEY);
 if (!info) {
@@ -32,6 +33,12 @@ async function generateSong() {
         })
     });
 
+    var blob = await song.blob();
+    const url = URL.createObjectURL(blob);
+
+    audio.style.display = "block";
+    audio.src = url;
+
     stopLoading();
 }
 
@@ -39,6 +46,7 @@ function startLoading() {
     generateBtn.disabled = true;
     generateBtnContent.style.display = "none";
     loading.style.display = "block";
+    audio.style.display = "none";
 }
 
 

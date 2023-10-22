@@ -9,8 +9,8 @@ logger = logging.getLogger(__name__)
 
 def merge(
     songs: list[DownloadedSong],
+    out,
     fade_duration=timedelta(seconds=5),
-    out="out.mp3"
 ) -> GeneratedSong:
     assert len(songs) > 0, "songs list is empty"
 
@@ -24,9 +24,10 @@ def merge(
             fades.append(f'[{prev}][{i}]acrossfade=d={fade_duration.total_seconds()}{target}')
 
     filters = ';'.join(fades)
-    args = ["ffmpeg"] + inputs + ["-filter_complex", filters, out]
+    args = ["ffmpeg", "-y"] + inputs + ["-filter_complex", filters, str(out)]
     logger.info("running command: '%s'", " ".join(map(lambda arg: f'"{arg}"', args)))
     proc = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    logger.info("output output file at '%s'", out)
     if proc.returncode != 0:
         logger.error("error while running ffmpeg: %s", proc.stdout.decode())
         raise Exception("failed to run ffmpeg")

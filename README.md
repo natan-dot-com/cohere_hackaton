@@ -14,3 +14,9 @@ pip3 install -r requirements.txt
 - Prefer the static version
 - Unpack the binary
 - Store it in a directory listed in the `PATH` environment variable
+
+## Running the server locally (dev mode)
+
+```bash
+python3 -m flask --app src/main.py --debug run --port 8888
+```

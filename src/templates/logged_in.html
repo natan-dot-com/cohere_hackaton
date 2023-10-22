@@ -3,43 +3,17 @@
     <head>
         <meta charset="utf-8">
         <title>Gerador de música do ano</title>
-        <link href="filename.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
     </head>
     <body>
-        <button onclick="generateSong()">Generate!</button>
-        <div><p id="loading_text"></p></div>
-        <script defer>
-          const BACKEND = "http://localhost:8888/callback/";
-          const CLIENT_ID = "4b01eb5194cd4aa6afb6aa9e31eca0f4";
-
-          // Local Storage key for storing spotify info
-          const SPOTIFY_INFO_KEY = "SPOTIFY_INFO"
-
-          const loadingText = document.getElementById("loading_text");
-
-          const info = localStorage.getItem(SPOTIFY_INFO_KEY);
-          if (!info) {
-              window.location.replace("/")
-          } else {
-              var { accessToken, profile } = JSON.parse(info);
-          }
-
-          async function generateSong() {
-              loadingText.innerText = "Loading...";
-
-              var song = await fetch(`/api/generate_song`, {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                      profileId: profile.id,
-                      accessToken,
-                  })
-              });
-
-              loadingText.innerText = "";
-          }
-        </script>
+        <main>
+            <div class="center">
+                <button id="generate" onclick="generateSong()">
+                    <div id="generate-btn-content">Login and generate!</div>
+                    <div class="loader" id="loading" style="display: none;"></div>
+                </button>
+            <div>
+        </main>
+        <script src="{{ url_for('static', filename='logged_in.js') }}" defer></script>
     </body>
 </html>

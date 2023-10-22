@@ -1,0 +1,70 @@
+:root {
+    --bg-color: #1E1E1E;
+    --btn-bg-color: green;
+    --btn-bg-hover-color: darkgreen;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    background-color: var(--bg-color);
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.center {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+}
+
+button {
+    background-color: var(--btn-bg-color);
+    color: white;
+    padding: 1em;
+    border: none;
+    font-size: 1.5rem;
+    font-family: monospace;
+    border-radius: 100px;
+    transition: background-color 100ms ease-in;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+}
+
+button[!disabled]:hover {
+    background-color: var(--btn-bg-hover-color);
+    cursor: pointer;
+}
+
+#login_btn {
+}
+
+#generate {
+    width: 356px;
+    height: 80px;
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid darkgreen; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

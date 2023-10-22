@@ -29,7 +29,7 @@ logger.setLevel(logging.DEBUG)
 
 REDIRECT_URI = "http://localhost:8888/callback/"
 SCOPE = "user-top-read"
-N_TOP_SONGS = 5
+N_TOP_SONGS = 30
 N_CLUSTERS = 2
 
 def fetch_meta(sp: spotipy.Spotify, user_id: str, song_id: str) -> Optional[SongMeta]:
@@ -48,6 +48,11 @@ def fetch_meta(sp: spotipy.Spotify, user_id: str, song_id: str) -> Optional[Song
 
     features_response=sp.audio_features([song_id])[0]
 
+    artist_id = track_response["artists"][0]["id"]
+    artist_info = sp.artist(artist_id)
+
+    genres: list[str] = artist_info["genres"]
+
     return SongMeta(
         id=song_id,
         song_name=song_name,
@@ -61,6 +66,7 @@ def fetch_meta(sp: spotipy.Spotify, user_id: str, song_id: str) -> Optional[Song
         valence=Valence(discretize(range=(0, 1), n_bins=5, value=features_response["valence"])),
         acousticness=Acousticness(discretize(range=(0, 1), n_bins=3, value=features_response["acousticness"])),
         song_bpm=Tempo(features_response["tempo"]),
+        genres=genres,
         preview_url=preview_url
     )
 
@@ -81,6 +87,7 @@ def generate_song_from_user(accessToken: str, user_id: str, prompt: str) -> Gene
     for track_id in top_tracks_id:
         meta = fetch_meta(sp, user_id, track_id)
         if meta is None:
+            logging.warn(f"skipping song")
             continue
 
         trackmeta_list.append(meta)

@@ -29,5 +29,6 @@ class SongMeta:
     valence: Valence
     acousticness: Acousticness
     song_bpm: Tempo
+    genres: list[str]
 
     preview_url: str

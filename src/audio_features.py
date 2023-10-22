@@ -9,7 +9,7 @@ class Danceability:
         assert self.value < len(mapping)
 
         s = "danceability="
-        return s + mapping[self.value] + " "
+        return s + mapping[self.value]
 
 @dataclass
 class Energy:
@@ -20,7 +20,7 @@ class Energy:
         assert self.value < len(mapping)
 
         s = "energy="
-        return s + mapping[self.value] + " "
+        return s + mapping[self.value]
 
 @dataclass
 class Loudness:
@@ -31,7 +31,7 @@ class Loudness:
         assert self.value < len(mapping)
 
         s = "loudness="
-        return s + mapping[self.value] + " "
+        return s + mapping[self.value]
 
 @dataclass
 class Speechiness:
@@ -42,7 +42,7 @@ class Speechiness:
         assert self.value < len(mapping)
 
         s = "speechiness="
-        return s + mapping[self.value] + " "
+        return s + mapping[self.value]
 
 @dataclass
 class Instrumentalness:
@@ -53,7 +53,7 @@ class Instrumentalness:
         assert self.value < len(mapping)
 
         s = "instrumentalness="
-        return s + mapping[self.value] + " "
+        return s + mapping[self.value]
 
 @dataclass
 class Valence:
@@ -64,7 +64,7 @@ class Valence:
         assert self.value < len(mapping)
 
         s = "valence="
-        return s + mapping[self.value] + " "
+        return s + mapping[self.value]
 
 @dataclass
 class Acousticness:
@@ -75,7 +75,7 @@ class Acousticness:
         assert self.value < len(mapping)
 
         s = "acousticness="
-        return s + mapping[self.value] + " "
+        return s + mapping[self.value]
 
 @dataclass
 class Tempo:
@@ -83,4 +83,24 @@ class Tempo:
 
     def __str__(self) -> str:
         s = "tempo="
-        return s + str(self.value) + " "
+        return s + self.musical_class()
+
+    def musical_class(self) -> str:
+        if self.value < 40:
+            return "Largissimo"
+        elif self.value <= 60:
+            return "Largo"
+        elif self.value <= 66:
+            return "Larghetto"
+        elif self.value <= 76:
+            return "Adagio"
+        elif self.value <= 108:
+            return "Andante"
+        elif self.value <= 120:
+            return "Moderato"
+        elif self.value <= 168:
+            return "Allegro"
+        elif self.value <= 200:
+            return "Presto"
+        else:
+            return "Prestissimo"

@@ -1,7 +1,10 @@
 import os
 import lyricsgenius as lg
 
-def get_lyrics(music: str, artist: str):
+def get_lyrics(
+    music: str,
+    artist: str
+) -> str:
     token = os.getenv('GENIUS_ACCESS_TOKEN')
     genius = lg.Genius(token)
     song = genius.search_song(music, artist)

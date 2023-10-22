@@ -3,6 +3,7 @@ import os
 import requests
 from typing import Optional
 from song import DownloadedSong
+from pathlib import Path
 from spotipy.oauth2 import SpotifyClientCredentials
 from dotenv import load_dotenv
 
@@ -25,7 +26,7 @@ def save_preview(sp: spotipy.Spotify, user_id: str, song_id: str) -> Optional[Do
     with open(full_path, 'wb') as f:
         f.write(song.content)
 
-    return full_path
+    return DownloadedSong(Path(full_path))
 
 if __name__ == '__main__':
 

@@ -27,3 +27,16 @@ pip3 install -r requirements.txt
 ```bash
 python3 -m flask --app src/main.py --debug run --port 8888
 ```
+
+Nossa aplicação utiliza algumas APIS (Cohere, Spotify, Genius).
+Logo é necessario preencher as variaveis de ambiente com suas respectivas chaves em um arquivo .env, no seguinte formato:
+```
+SPOTIFY_CLIENT_ID=
+SPOTIFY_CLIENT_SECRET=
+COHERE_API_KEY=
+GENIUS_ACCESS_TOKEN=
+```
+
+1-  o usuario deve logar em sua conta spotify, para a API poder extrair informações a respeito de suas musicas mais ouvidas. 
+2- Deve colocar um prompt onde se deseja que a musica final seja relacionada.
+3- O audio final será disponibilizado para que o usuario possa ouvir/baixar na propria pagina. 

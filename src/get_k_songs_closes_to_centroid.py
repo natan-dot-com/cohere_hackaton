@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.metrics import pairwise_distances
-from sklearn.cluester import KMeans
+from sklearn.cluster import KMeans
 
 def get_k_songs_closes_to_centroid(
     kmeans: KMeans,
